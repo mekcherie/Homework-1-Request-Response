@@ -3,6 +3,7 @@
 # (And make sure to delete this TODO message when you're done!)
 
 from flask import Flask
+import random 
 
 app = Flask(__name__)
 
@@ -33,14 +34,26 @@ def multiply(number1, number2):
     return f' {number1} multiply {number2} is {answer}'
 
 
+# two of the strech challanges!
+@app.route('/sayntimes/<word>/<n>')
+def sayntimes(word, n):
+    if n.isdigit():
+        answer = ""
+        for i in range(int(n)):
+            answer += word + " "
+            print(answer)
+        return answer
+    else:
+         return f'Invalid input. Try next time'
 
 
-
-
-
-
-
-
+@app.route('/dicegame')
+def dicegame():
+    diceroll = random.randint(1,6)
+    if diceroll != 6:
+        return f"You rolled a {str(diceroll)}. You lost!"
+    else:
+        return f"You rolled a {str(diceroll)}. You won!"
 
 
 if __name__ == '__main__':
